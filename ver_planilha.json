@@ -1,0 +1,911 @@
+{
+  "name": "ver_planilha",
+  "nodes": [
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        0,
+        224
+      ],
+      "id": "0242dbc0-c26d-44cf-9940-c5f5ba44552e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        224,
+        272
+      ],
+      "id": "337d053c-ab5a-423a-af7b-47595e1cf76b",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "NOVO CLIENTE"
+            },
+            {
+              "lookupColumn": "enviado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        -112
+      ],
+      "id": "32769386-4242-4e4c-9a13-6b7b6517c4da",
+      "name": "PEGA NOVO CLIENTE",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "ANTIGO"
+            },
+            {
+              "lookupColumn": "enviado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        80
+      ],
+      "id": "566d1989-1ca6-4ba6-9376-29e4d653e1bf",
+      "name": "PEGA ANTIGO",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "FICAR DE OLHO"
+            },
+            {
+              "lookupColumn": "enviado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        272
+      ],
+      "id": "0455e92e-7712-492e-be3c-231efc4034ad",
+      "name": "PEGA FICAR DE OLHO",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "IMPORTANTE"
+            },
+            {
+              "lookupColumn": "enviado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        464
+      ],
+      "id": "1d6e8aca-6e3c-4b0b-a29d-fec80a237f5b",
+      "name": "PEGA IMPORTANTE",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "PEGAR OPÇÃO"
+            },
+            {
+              "lookupColumn": "enviado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        656
+      ],
+      "id": "6a0940e9-1879-47f9-b2aa-d3296e4f43b2",
+      "name": "PEGA PEGAR OPÇÃO",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -112
+      ],
+      "id": "5efec19e-3097-41c1-b82f-91f63eff20b1",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "maxItems": 20
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        80
+      ],
+      "id": "f69a6929-5951-4656-96ec-b53a320ca285",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {
+        "maxItems": 2
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        272
+      ],
+      "id": "3c7951bf-95a0-4ff9-9745-e10801d69f09",
+      "name": "Limit2"
+    },
+    {
+      "parameters": {
+        "maxItems": 2
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        464
+      ],
+      "id": "c1dfd276-620a-4747-a254-fe5f93d17443",
+      "name": "Limit3"
+    },
+    {
+      "parameters": {
+        "maxItems": 2
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        656
+      ],
+      "id": "d25518bf-2d65-4ed4-afc7-f3354c124d16",
+      "name": "Limit4"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        448,
+        272
+      ],
+      "id": "04561cc0-8c48-4a9d-bc76-36f3befe526c",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        208
+      ],
+      "id": "52f1037e-9652-4cb1-83a4-4e98d00b81b3",
+      "name": "Wait",
+      "webhookId": "SEU_WEBHOOK_ID_AQUI",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Captura os dados vindos da planilha\nconst etiqueta = $json.etiqueta;\nconst nome = $json.nome_whats || \"amigo(a)\"; // Caso o nome esteja vazio, usa um padrão\n\nconst frases = {\n  \"ANTIGO\": [\n    `Oi ${nome}, tudo bem? Tá podendo falar um minutinho?`,\n    `Opa ${nome}, passando para saber se você ainda está buscando imóvel?`,\n    `Tudo certo, ${nome}? Vi seu nome aqui e resolvi saber se deu tudo certo com a sua busca.`,\n    `Oi ${nome}, tá por aí? Tenho uma dúvida sobre aquele perfil de imóvel que você gosta.`,\n    `Fala ${nome}! Como andam as coisas? Alguma novidade na procura por imóveis?`,\n    `Oi ${nome}, tudo bem? Surgiu algo que lembrei de você, podemos falar?`,\n    `Boa tarde, ${nome}. Tá conseguindo ver mensagens agora?`,\n    `Oi ${nome}, tudo bom? Só para confirmar se você ainda está no mercado para comprar.`,\n    `E aí ${nome}, beleza? Se tiver um tempo, queria te mandar umas opções novas.`,\n    `Oi ${nome}, como você está? Vi seu contato aqui e resolvi dar um alô!`\n  ],\n  \"NOVO CLIENTE\": [\n    `Olá ${nome}, recebi seu interesse no Chaves na Mão. Como posso te ajudar hoje?`,\n    `Oi ${nome}, vi que você pediu informações sobre um imóvel. Podemos conversar?`,\n    `Tudo bem, ${nome}? Sou da Imobi e recebi seu contato pelo portal. Qual o melhor horário para falarmos?`,\n    `Olá ${nome}, obrigado pelo contato no Chaves na Mão! Você quer mais fotos do imóvel?`,\n    `Oi ${nome}, vi seu interesse agora pouco no portal. O imóvel ainda está disponível, quer agendar visita?`,\n    `Tudo certo, ${nome}? Sou corretor e vi seu pedido no Chaves na Mão. Posso te mandar o vídeo dele?`,\n    `Olá ${nome}! Vi que você gostou daquele imóvel. Quer ver outras opções parecidas?`,\n    `Oi ${nome}, tudo bom? Recebi sua ficha do portal. Você busca para morar ou investir?`,\n    `Boa tarde, ${nome}. Acabei de ver seu interesse no Chaves na Mão. Vamos agendar uma ligação?`,\n    `Olá ${nome}, prazer! Sou responsável pelo imóvel que você viu no portal. Posso tirar suas dúvidas?`\n  ],\n  \"IMPORTANTE\": [\n    `Oi ${nome}, tudo bem? Passando para saber se você recebeu as últimas informações que te mandei.`,\n    `Olá ${nome}, tudo bom? Gostaria de saber se ficou com alguma dúvida sobre o que conversamos por último.`,\n    `Tudo certo, ${nome}? Estou à disposição caso precise de algum detalhe a mais sobre as opções.`,\n    `Oi ${nome}, como você está? Consegue falar rapidinho hoje sobre a sua busca?`,\n    `Boa tarde, ${nome}. Vi seu contato aqui e resolvi saber se você precisa de algum apoio meu agora.`,\n    `Oi ${nome}, tudo bem? Passando para me colocar à disposição caso queira avançar com alguma das opções.`,\n    `Fala ${nome}, beleza? Como estão as coisas por aí? Se precisar de algo, só me chamar.`,\n    `Olá ${nome}, tudo certo? Estou acompanhando as novidades aqui e gostaria de saber se sua busca continua a mesma.`,\n    `Oi ${nome}, tudo bom? Quando tiver um tempinho, gostaria de alinhar uns detalhes contigo.`,\n    `Tudo bem, ${nome}? Passando apenas para manter nosso contato ativo e me deixar às ordens.`\n  ],\n  \"FICAR DE OLHO\": [\n    `Oi ${nome}, tudo bem? Lembrei da nossa conversa e queria saber se os planos mudaram.`,\n    `Opa ${nome}, como você está? Vi um imóvel que é a sua cara e lembrei de você!`,\n    `Tudo certo, ${nome}? Passando apenas para desejar uma ótima semana e me colocar à disposição.`,\n    `Oi ${nome}, tá por aí? Surgiu uma oportunidade na região que você gosta, quer ver?`,\n    `Olá ${nome}, tudo bom? Como está o projeto da casa nova? Se precisar de algo, conte comigo.`,\n    `Oi ${nome}, passando para te mandar esse vídeo de um imóvel novo. O que acha?`,\n    `Boa tarde, ${nome}. Só para te manter atualizado sobre os valores do bairro que conversamos.`,\n    `Oi ${nome}, tudo bem? Queria saber se você ainda tem interesse em receber opções por aqui.`,\n    `E aí ${nome}, beleza? Como está a correria? Quando quiser retomar a busca, estou aqui.`,\n    `Oi ${nome}, tudo bom? Dei uma revisada no seu perfil e achei algo interessante. Quer ver?`\n  ],\n  \"PEGAR OPÇÃO\": [\n    `Oi ${nome}, tudo bem? Sabe se tem algum vizinho querendo vender ou alugar por aí?`,\n    `Opa ${nome}, estou com um cliente buscando nessa região. Você teria alguma indicação?`,\n    `Tudo certo, ${nome}? Estou precisando de novas opções no seu condomínio. Sabe de algo?`,\n    `Oi ${nome}, tá podendo falar? Queria saber se você ainda tem aquele imóvel disponível.`,\n    `Olá ${nome}, tudo bom? Estou captando novos imóveis na sua área. Podemos conversar sobre o seu?`,\n    `Oi ${nome}, sou corretor e tenho busca ativa no seu prédio. Conhece alguém que queira vender?`,\n    `E aí ${nome}, beleza? Queria saber se você tem interesse em anunciar seu imóvel conosco.`,\n    `Oi ${nome}, tudo bem? Estamos com alta demanda no seu bairro. Tem interesse em vender?`,\n    `Olá ${nome}, passando para ver se você tem alguma opção nova para me passar.`,\n    `Tudo bom, ${nome}? Sabe de algum imóvel bom que entrou para venda recentemente?`\n  ]\n};\n\n// Seleciona a lista de frases baseada na etiqueta da planilha\n// Se a etiqueta não for encontrada, usa uma frase genérica para segurança\nconst listaSelecionada = frases[etiqueta] || [`Oi ${nome}, tudo bem?`];\n\n// Sorteia uma das 10 frases da lista para humanizar o envio\nconst fraseSorteada = listaSelecionada[Math.floor(Math.random() * listaSelecionada.length)];\n\nreturn {\n  mensagemFinal: fraseSorteada,\n  contatoTel: $json.tel1 // Já deixa o telefone pronto para o próximo nó\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        208
+      ],
+      "id": "7d5fc5d0-795f-420e-b09c-abb11a2a2754",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "Chatting",
+        "operation": "Send Text",
+        "session": "default",
+        "chatId": "=55{{ $json.contatoTel }}@c.us",
+        "text": "={{ $node[\"Code in JavaScript\"].json.mensagemFinal }}",
+        "requestOptions": {}
+      },
+      "type": "@devlikeapro/n8n-nodes-waha.WAHA",
+      "typeVersion": 202502,
+      "position": [
+        1344,
+        208
+      ],
+      "id": "a7c24f1b-cd5a-406d-9fdf-ae7184eb2fa1",
+      "name": "Send a text message",
+      "credentials": {
+        "wahaApi": {
+          "id": "SUA_CREDENTIAL_ID_WAHA",
+          "name": "WAHA account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "PLANILHA_CONTATOS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts (1)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Contato": "={{ $('Sort').item.json.Contato }}",
+            "enviado": "SIM"
+          },
+          "matchingColumns": [
+            "Contato"
+          ],
+          "schema": [
+            {
+              "id": "Contato",
+              "displayName": "Contato",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nome_whats",
+              "displayName": "nome_whats",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tel1",
+              "displayName": "tel1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tel2",
+              "displayName": "tel2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "etiqueta",
+              "displayName": "etiqueta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "enviado",
+              "displayName": "enviado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        272
+      ],
+      "id": "873277c5-5a6c-4ddd-ae53-72676bc24915",
+      "name": "Update row in sheet",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 15
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -896,
+        272
+      ],
+      "id": "c0d20487-ad04-448d-b101-e84d9b678ec0",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -112
+      ],
+      "id": "726fe06f-1bcf-46e4-abc2-704b4d34c598",
+      "name": "Sort1"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        80
+      ],
+      "id": "dd263a0c-83a4-460d-b1aa-c14705f9344d",
+      "name": "Sort2"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        272
+      ],
+      "id": "8d5ffa05-3d83-4e04-bd6a-5f262eb44bec",
+      "name": "Sort3"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        464
+      ],
+      "id": "65f39444-d3aa-42b8-9b41-94e308c0fe14",
+      "name": "Sort4"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        656
+      ],
+      "id": "a29aedee-82f2-4445-bfac-2dff52a76162",
+      "name": "Sort5"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const min = 120;\nconst max = 240; \nconst delaySeconds = Math.floor(Math.random() * (max - min + 1) + min);\n\nconsole.log(`Aguardando ${delaySeconds} segundos antes do próximo envio...`);\n\n// Função que faz o n8n esperar\nawait new Promise(resolve => setTimeout(resolve, delaySeconds * 1000));\n\nreturn $input.item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        208
+      ],
+      "id": "60b2b098-73a4-4c94-9c19-b3401e9cac9f",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEGA NOVO CLIENTE": {
+      "main": [
+        [
+          {
+            "node": "Sort1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEGA ANTIGO": {
+      "main": [
+        [
+          {
+            "node": "Sort2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEGA FICAR DE OLHO": {
+      "main": [
+        [
+          {
+            "node": "Sort3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEGA IMPORTANTE": {
+      "main": [
+        [
+          {
+            "node": "Sort4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEGA PEGAR OPÇÃO": {
+      "main": [
+        [
+          {
+            "node": "Sort5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Limit2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Limit3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Limit4": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "PEGA NOVO CLIENTE",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PEGA ANTIGO",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PEGA FICAR DE OLHO",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PEGA IMPORTANTE",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PEGA PEGAR OPÇÃO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort1": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort2": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort3": {
+      "main": [
+        [
+          {
+            "node": "Limit2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort4": {
+      "main": [
+        [
+          {
+            "node": "Limit3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort5": {
+      "main": [
+        [
+          {
+            "node": "Limit4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8e5b3f4a-9638-4785-8870-5dcf2435eba5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "SEU_INSTANCE_ID_AQUI"
+  },
+  "id": "zcT2WV9gjY4nCAbT",
+  "tags": []
+}

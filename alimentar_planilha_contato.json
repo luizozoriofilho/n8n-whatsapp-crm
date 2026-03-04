@@ -1,0 +1,628 @@
+{
+  "name": "alimentar_planilha_contato",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://people.googleapis.com/v1/people/me/connections?personFields=names,phoneNumbers,metadata&sortOrder=LAST_MODIFIED_DESCENDING&pageSize=10",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -64,
+        -288
+      ],
+      "id": "e81c5c56-ae63-45cc-8902-a40cbc6c7ed2",
+      "name": "HTTP Request",
+      "credentials": {
+        "googleOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_GOOGLE",
+          "name": "Google account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "connections",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -288
+      ],
+      "id": "5185274e-62e6-46dd-8350-62a26b522b95",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9cbf09b4-cd95-48cc-8e41-a77af6755cc3",
+              "leftValue": "={{ $json.displayName }}\n",
+              "rightValue": "C",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        608,
+        -288
+      ],
+      "id": "c7e03bd5-4549-40da-ac55-9efa5b60c3ac",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contatos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Contato",
+              "lookupValue": "={{ $json.displayName }}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        832,
+        -224
+      ],
+      "id": "0134abe2-5a96-4f72-bef1-e5e3d3656b04",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "displayName",
+              "field2": "Contato"
+            }
+          ]
+        },
+        "joinMode": "keepNonMatches",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1056,
+        -288
+      ],
+      "id": "f2f762d4-2d0e-4bd2-b99f-e030be335970",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b51199e2-9489-480d-82ce-bc54b8a43689",
+              "name": "displayName",
+              "value": "={{ $json[\"names\"][0][\"displayName\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "88911bd8-d576-4b58-9ab4-e6913bf6df39",
+              "name": "phoneNumber",
+              "value": "={{ $json.phoneNumbers[0].value.replace('+55','') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        -288
+      ],
+      "id": "eff6a1df-f1d0-4e70-8638-a5f6c3c03c2d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contatos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Contato": "={{ $json.displayName }}",
+            "tel1": "={{ $json.phoneNumber }}",
+            "etiqueta": "={{ $json.displayName.toLowerCase().includes('xaveco') ? 'PEGAR OPÇÃO' : ($json.displayName.toLowerCase().includes('investidor') ? 'INVESTIDOR' : 'NOVO CLIENTE') }}",
+            "data": "={{ $now.toFormat('MM/dd/yyyy') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Contato",
+              "displayName": "Contato",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nome_whats",
+              "displayName": "nome_whats",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tel1",
+              "displayName": "tel1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tel2",
+              "displayName": "tel2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "etiqueta",
+              "displayName": "etiqueta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1280,
+        -288
+      ],
+      "id": "8ceb37a0-8dac-49d2-bad6-f2ce57fde5a8",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        -288
+      ],
+      "id": "fd087f82-e97c-4e07-abcd-52e20f97575e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        16
+      ],
+      "id": "67118b70-ec05-4c26-9666-ad0bc2fe380b",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contatos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "etiqueta",
+              "lookupValue": "NOVO CLIENTE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        16
+      ],
+      "id": "e127cf6e-8445-4151-a1c5-74e8a6e2576b",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b73cde50-dcfb-4e97-814a-8c84e257c467",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "={{ $now.minus({ days: 30 }) }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        160,
+        16
+      ],
+      "id": "7e201ed8-4f30-408a-a295-0a4c5da57948",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "SEU_GOOGLE_SHEET_ID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contatos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SEU_GID_AQUI",
+          "mode": "list",
+          "cachedResultName": "contacts.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_GOOGLE_SHEET_ID_AQUI/edit#gid=SEU_GID_AQUI"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "etiqueta": "ANTIGO",
+            "Contato": "={{ $json.Contato }}"
+          },
+          "matchingColumns": [
+            "Contato"
+          ],
+          "schema": [
+            {
+              "id": "Contato",
+              "displayName": "Contato",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nome_whats",
+              "displayName": "nome_whats",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tel1",
+              "displayName": "tel1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tel2",
+              "displayName": "tel2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "etiqueta",
+              "displayName": "etiqueta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        16
+      ],
+      "id": "628f338b-862f-4fa3-85a9-e1e4da76cbe7",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SUA_CREDENTIAL_ID_SHEETS",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4ed3fa94-99da-4e2d-834c-178a073d21af",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "SEU_INSTANCE_ID_AQUI"
+  },
+  "id": "pWoe64p1392HYjr6",
+  "tags": []
+}
